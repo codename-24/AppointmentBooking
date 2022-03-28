@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <h1>Appointment Booking App</h1>
+        <input id="firsttextbox" type="text" placeholder="name">
+        <input id="secondtextbox" type="text" placeholder="email">
+        <input type="button" value="submit" onclick="pushRules()">
+        <h3>Bookings</h3>
+        <ul id="list"></ul>
+        
+        <script>function pushRules(list){
+    
+            var rules = "";
+        
+            var w1 = document.getElementById('firsttextbox').value;
+            var w2 = document.getElementById('secondtextbox').value;
+            var w = w1+'-->'+w2;
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(w));
+            let formData = JSON.parse(localStorage.getItem('formData')) || [];
+            formData.push({
+                name : w1,
+                email :w2
+            });
+            localStorage.setItem("Person",JSON.stringify(formData));
+            var removeBtn = document.createElement("input");
+            removeBtn.type = "button";
+            removeBtn.value = "Remove";
+            removeBtn.onclick = remove;
+            li.appendChild(removeBtn);
+            document.getElementById("list").appendChild(li);
+        }
+        function remove(e) {
+          var el = e.target;
+          el.parentNode.remove();
+        }</script>
+    </form>
+    
+</body>
+</html>
