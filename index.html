@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,6 +18,14 @@
         <script>function pushRules(list){
     
             var rules = "";
+            
+            if (localStorage.clickcount) {
+            localStorage.clickcount = Number(localStorage.clickcount)+1;
+            } else {
+            localStorage.clickcount = 1;
+            }
+            var count = localStorage.clickcount;
+        
         
             var w1 = document.getElementById('firsttextbox').value;
             var w2 = document.getElementById('secondtextbox').value;
@@ -29,12 +37,24 @@
                 name : w1,
                 email :w2
             });
-            localStorage.setItem("Person",JSON.stringify(formData));
+            for(let i=0;i<count;i++)
+            {
+            localStorage.setItem("Person "+count,JSON.stringify(formData));
+            }
+
+
+
             var removeBtn = document.createElement("input");
+            var editBtn = document.createElement("input");
             removeBtn.type = "button";
+            editBtn.type = "button";
             removeBtn.value = "Remove";
+            editBtn.value = "Edit";
+            editBtn.onclick= remove;
             removeBtn.onclick = remove;
             li.appendChild(removeBtn);
+            li.appendChild(editBtn);
+            document.getElementById("list").appendChild(li);
             document.getElementById("list").appendChild(li);
         }
         function remove(e) {
